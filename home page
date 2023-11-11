@@ -1,0 +1,246 @@
+package payrollFiles;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Home extends JFrame implements ActionListener{
+	
+	JMenuBar menuBar;
+	JMenu menuEmployee,menuAccount,menuPayment, menuDepartment,menuDeduction,menuHelp,
+     menuAllowance,menuAddEmployee,menuPaymentSlip;
+	JMenuItem menuPartialTimeEmployee,menuFullTimeEmployee,menuItempaymentSlip;
+	
+	//the class Menus holda the common menus( for new record,update and delete)
+	//JMenuItem menuCostSharing,menuLoan,menuOtherDeduction;
+
+	Menus employeeMenus= new Menus();
+	Menus accountMenus= new Menus();
+	Menus departmentMenus= new Menus();
+	Menus deductionMenus= new Menus();
+	//Menus costSharingMenus= new Menus();
+	//Menus loanMenus= new Menus();
+	//Menus deductionMenus= new Menus();
+	Menus basicSalaryMenus= new Menus();
+	Menus allowanceMenus= new Menus();
+
+	
+
+	Home(){
+		super("Home page");
+		
+		menuBar= new JMenuBar();
+		setJMenuBar(menuBar);
+		//creating munus
+		menuEmployee= new JMenu("Employee");
+		menuAccount= new JMenu("Account");
+		menuPayment= new JMenu("Payment");
+		menuDepartment= new JMenu("Department");
+		menuDeduction= new JMenu("Deduction");
+		
+		menuPaymentSlip= new JMenu("Pay Slip");
+		
+		menuHelp= new JMenu("help");
+
+
+		//creating submenus on menu Payment
+		menuItempaymentSlip= new JMenuItem("View payment slip");
+		menuAllowance= new JMenu("Allowance");
+		//menuAllowance.addActionListener(this);
+		
+		//creating submenus on menu Deduction
+	
+		//adding menus on menu bar
+		menuBar.add(menuEmployee);
+		menuBar.add(menuPayment);
+		menuBar.add(menuDeduction);
+		menuBar.add(menuPaymentSlip);
+
+		menuBar.add(menuDepartment);
+		menuBar.add(menuAccount);
+		menuBar.add(menuHelp);
+		
+		//setting menu item name and adding department menu items on menu Department
+		departmentMenus.record.setText("New department");
+		departmentMenus.view.setText("View department record");
+		departmentMenus.update.setText("Edit Department record");
+		departmentMenus.delete.setText("Delete Department");
+		menuDepartment.add(departmentMenus.record);
+		menuDepartment.add(departmentMenus.view);
+		menuDepartment.add(departmentMenus.update);
+		menuDepartment.add(departmentMenus.delete);
+		
+		//menuPartialTimeEmployee= new JMenu("Partial E");
+		//setting menu item name and adding employee menu items on menu Employee
+		menuAddEmployee= new JMenu("Add new");
+		menuFullTimeEmployee=new JMenuItem("Full time employee");
+		menuPartialTimeEmployee=new JMenuItem("Partial time employee");		
+		employeeMenus.view.setText("View employee record");
+		employeeMenus.update.setText("Edit employee record");
+		employeeMenus.delete.setText("Delete employee");
+		menuEmployee.add(menuAddEmployee);
+		menuAddEmployee.add(menuFullTimeEmployee);
+		menuAddEmployee.add(menuPartialTimeEmployee);
+		menuEmployee.add(employeeMenus.view);
+		menuEmployee.add(employeeMenus.update);
+		menuEmployee.add(employeeMenus.delete);
+		
+        //setting menu item name and adding account menu items on menu Account 
+		accountMenus.record.setText("New account");
+		accountMenus.view.setText("View account record");
+		accountMenus.update.setText("Edit account record");
+		accountMenus.delete.setText("Delete account");
+		menuAccount.add(accountMenus.record);
+		menuAccount.add(accountMenus.view);
+		menuAccount.add(accountMenus.update);
+		menuAccount.add(accountMenus.delete);
+		
+        //setting menu item name and adding payment menu items on menu Payment 
+		menuPayment.add(menuAllowance);
+		menuPayment.add(menuItempaymentSlip);
+
+		menuPaymentSlip.add(menuItempaymentSlip);
+		
+		allowanceMenus.record.setText("Add allowance");
+		allowanceMenus.view.setText("View allowance record");
+		allowanceMenus.update.setText("Update allowance");
+		allowanceMenus.delete.setText("Delete the allowance");
+		menuAllowance.add(allowanceMenus.record);
+		menuAllowance.add(allowanceMenus.view);
+		menuAllowance.add(allowanceMenus.update);
+		menuAllowance.add(allowanceMenus.delete);
+		
+        //adding deduction menu items on menu Deduction 
+		
+		
+		menuHelp.add("help");
+		
+		/*
+		 
+		menuCostSharing= new JMenu("Cost sharing");
+		menuLoan= new JMenu("Loan");
+		menuOtherDeduction= new JMenu("Other deduction");
+		
+		
+		costSharingMenus.record.setText("Add cost sharing");
+		costSharingMenus.view.setText("View cost sharing record");
+		costSharingMenus.update.setText("Update cost sharing");
+		costSharingMenus.delete.setText("Delete the cost sharing");
+		menuCostSharing.add(costSharingMenus.record);
+		menuCostSharing.add(costSharingMenus.view);
+		menuCostSharing.add(costSharingMenus.update);
+		menuCostSharing.add(costSharingMenus.delete);
+		
+		loanMenus.record.setText("Add loan");
+		loanMenus.view.setText("View loan record");
+		loanMenus.update.setText("Update loan");
+		loanMenus.delete.setText("Delete the loan");
+		menuLoan.add(loanMenus.record);
+		menuLoan.add(loanMenus.view);
+		menuLoan.add(loanMenus.update);
+		menuLoan.add(loanMenus.delete);
+		
+		//adding deduction menu items on menu Deduction 
+		menuDeduction.add(menuCostSharing);
+		menuDeduction.add(menuLoan);
+		menuDeduction.add(menuOtherDeduction);
+		
+		deductionMenus.record.setText("Add other deduction");
+		deductionMenus.view.setText("View other deduction record");
+		deductionMenus.update.setText("Update other deduction");
+		deductionMenus.delete.setText("Delete the other deduction");
+		menuOtherDeduction.add(deductionMenus.record);
+		menuOtherDeduction.add(deductionMenus.view);
+		menuOtherDeduction.add(deductionMenus.update);
+		menuOtherDeduction.add(deductionMenus.delete);
+		
+		basicSalaryMenus.record.setText("Add other salary salary");
+		basicSalaryMenus.view.setText("View  salary record");
+		basicSalaryMenus.update.setText("Update basic salary");
+		basicSalaryMenus.delete.setText("Delete the basic salary");
+		menuBasicSalary.add(basicSalaryMenus.record);
+		menuBasicSalary.add(basicSalaryMenus.view);
+		menuBasicSalary.add(basicSalaryMenus.update);
+		menuBasicSalary.add(basicSalaryMenus.delete);
+		*/
+		
+        //adding deduction menu items on menu Deduction 
+		deductionMenus.record.setText("Add deduction");
+		deductionMenus.view.setText("View deduction record");
+		deductionMenus.update.setText("Update deduction");
+		deductionMenus.delete.setText("Delete the deduction");
+		menuDeduction.add(deductionMenus.record);
+		menuDeduction.add(deductionMenus.view);
+		menuDeduction.add(deductionMenus.update);
+		menuDeduction.add(deductionMenus.delete);
+	
+		setSize(1500,700);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		// components registration
+		menuFullTimeEmployee.addActionListener(this);
+		menuPartialTimeEmployee.addActionListener(this);
+		allowanceMenus.record.addActionListener(this);
+		deductionMenus.record.addActionListener(this);
+		menuItempaymentSlip.addActionListener(this);
+		menuPaymentSlip.addActionListener(this);
+		
+		employeeMenus.view.addActionListener(this);
+		employeeMenus.update.addActionListener(this);
+		employeeMenus.delete.addActionListener(this);
+
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		//String command= e.getActionCommand();
+		if(e.getSource() == menuFullTimeEmployee) {
+			new FullTimeEmployee("record").setVisible(true);
+		}
+		/*
+		else if(e.getSource() == employeeMenus.view) {
+			new FullTimeEmployee("view").setVisible(true);
+		}
+		else if(e.getSource() == employeeMenus.update) {
+			new FullTimeEmployee("update").setVisible(true);
+		}
+		else if(e.getSource() == employeeMenus.delete) {
+			new FullTimeEmployee("delete").setVisible(true);
+		}
+		else if(e.getSource() == basicSalaryMenus.record) {
+			new Salary("record").setVisible(true);
+		}
+		*/
+		
+		if(e.getSource() == menuPartialTimeEmployee) {
+			new PartialTimeEmployee("record").setVisible(true);
+		}
+		if(e.getSource() == employeeMenus.view) {
+			new FullTimeEmployee("view").setVisible(true);
+		}
+		if(e.getSource() == employeeMenus.delete) {
+			new FullTimeEmployee("delete").setVisible(true);
+		}
+
+		if(e.getSource() == allowanceMenus.record) {
+			new Allowance("record").setVisible(true);
+		}
+		if(e.getSource() == deductionMenus.record) {
+			new Deduction("record").setVisible(true);
+		}
+		
+		if(e.getSource() == menuItempaymentSlip) {
+			
+			new PaymentSlip("view").setVisible(true);
+		}
+		if(e.getSource() == menuPaymentSlip) {
+			new PaymentSlip("view").setVisible(true);
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		new Home().setVisible(true);
+
+	}
+	
+
+}
